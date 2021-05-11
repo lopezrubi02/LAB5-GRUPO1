@@ -19,6 +19,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         /** Completar */
+        http.formLogin().loginPage("/user/signIn").loginProcessingUrl("/processLogin")
+                .usernameParameter("correo").defaultSuccessUrl("/user/signInRedirect",true);
+
+        http.authorizeRequests()
+                .antMatchers("/juegos","/juegos/**").hasAnyAuthority("admin","user")
+                .antMatchers("/plataformas","/plataformas/**").hasAuthority("admin")
+                .anyRequest().permitAll();
+
+        http.logout()
+                .logoutSuccessUrl("/");
                
     }
 
@@ -28,7 +38,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        /** Completar */
+        auth.jdbcAuthentication()
+                .dataSource(datasource)
+                .passwordEncoder(new BCryptPasswordEncoder())
+                .usersByUsernameQuery("select correo, password, enabled FROM usuarios WHERE correo = ?")
+                .authoritiesByUsernameQuery("select u.correo, u.autorizacion from usuario u " +
+                        "where u.email = ? and u.activo = 1");
 
     }
 
