@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +26,11 @@ import java.util.Optional;
 public class JuegosController {
     //
 
+    @Autowired
+    JuegosRepository juegosRepository;
 
+    @Autowired
+    PlataformasRepository plataformasRepository;
 
     @GetMapping( ... )
     public String listaJuegos ( ... ){
@@ -37,20 +42,35 @@ public class JuegosController {
                /** Completar */
     }
 
-    @GetMapping( ... )
+    @GetMapping("/nuevo")
     public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego){
-               /** Completar */
+
+        model.addAttribute("listaPlata",plataformasRepository.findAll());
+        return "juegos/editarFrm.html";
     }
 
-    @GetMapping( ... )
+    @GetMapping("/editar")
     public String editarJuegos(@RequestParam("id") int id, Model model){
-                /** Completar */
-
+        Optional<Juegos> optional = juegosRepository.findById(id);
+        if(optional.isPresent()){
+            Juegos juegos = optional.get();
+            model.addAttribute("juego",juegos);
+            List<Plataformas> listaPlata = plataformasRepository.findAll();
+            model.addAttribute("listaPlata",listaPlata);
+            return "juegos/editarFrm.html";
+        }
+        return "juegos/lista";
     }
 
-    @PostMapping( ... )
+    @PostMapping("/guardar")
     public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
-                /** Completar */
+        if(bindingResult.hasErrors()){
+            model.addAttribute("listaPlata",plataformasRepository.findAll());
+            return"juegos/editarFrm.html";
+        }else{
+            juegosRepository.save(juego);
+            return "redirect:/juegos/lista";
+        }
 
     }
 
