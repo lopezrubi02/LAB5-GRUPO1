@@ -90,10 +90,13 @@ public class JuegosController {
 
     @PostMapping("/juegos/guardar")
     public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
+        //System.out.println("Id:" + juego.getIdjuego());
         if(bindingResult.hasErrors()){
+            System.out.println(bindingResult.getAllErrors());
             model.addAttribute("listaPlata",plataformasRepository.findAll());
             return"juegos/editarFrm.html";
         }else{
+            //System.out.println("Id antes de guardar:" + juego.getIdjuego());
             juegosRepository.save(juego);
             return "redirect:/juegos/lista";
         }

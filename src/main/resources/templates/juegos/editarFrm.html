@@ -12,6 +12,7 @@
         </div>
         <div class="container-fluid">
                 <form method="POST" th:action="@{'/juegos/guardar'}" th:object="${juego}">
+                    <input th:value="${juego.idjuego}" name="idjuego" type="hidden">
                     <div class="form-group">
                         <label>Nombre</label>
                         <input type="text" class="form-control" th:field="*{nombre}">
@@ -21,6 +22,8 @@
                     <div class="form-group">
                         <label>Descripción</label>
                         <textarea class="form-control" th:field="*{descripcion}"></textarea>
+                        <div class="text-danger" th:if="${#fields.hasErrors('descripcion')}"
+                             th:errors="*{descripcion}"></div>
                         
                     </div>
                     <div class="form-group">
@@ -53,7 +56,7 @@
                     </div>
                     <input type="hidden" id="idjuego" name="idjuego" value="2" />
                     <a th:href="@{'/juegos/lista'}" class="btn btn-danger">Cancelar</a>
-                    <button type="submit" class="btn btn-primary" th:text="${juego.getIdjuego()} != 0 ? 'Actualizar':'Guardar'">Actualizar</button>
+                    <button type="submit" class="btn btn-primary" th:text="${juego.getIdjuego()} != 0 ? 'Actualizar':'Guardar'"></button>
                 </form>
         </div>
         </main>

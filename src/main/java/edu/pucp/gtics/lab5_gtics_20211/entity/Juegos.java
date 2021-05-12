@@ -9,6 +9,7 @@ import javax.validation.constraints.*;
 public class Juegos {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idjuego;
 
     @Size(min = 3, max = 45, message = "Debe contener entre 3 y 45 caracteres")
@@ -18,8 +19,8 @@ public class Juegos {
     private String descripcion;
 
     @NotNull(message = "Coloque un número")
-    @DecimalMin(value = "10" , message = "Valor maximo 10")
-    @DecimalMax(value = "500" , message = "Valor mínimo 500")
+    @DecimalMin(value = "10" , message = "Valor minimo 10")
+    @DecimalMax(value = "500" , message = "Valor maximo 500")
     private double precio;
 
     private String image;
