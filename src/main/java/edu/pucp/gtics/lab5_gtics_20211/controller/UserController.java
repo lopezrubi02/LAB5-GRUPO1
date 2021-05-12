@@ -48,7 +48,7 @@ public class UserController {
         session.setAttribute("usuario",usuario);
 
 
-        return "juegos/lista";
+        return "redirect:/vista";
     }
 
 }

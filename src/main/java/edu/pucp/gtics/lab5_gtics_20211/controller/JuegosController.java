@@ -1,6 +1,7 @@
 package edu.pucp.gtics.lab5_gtics_20211.controller;
 
 import edu.pucp.gtics.lab5_gtics_20211.entity.Juegos;
+import edu.pucp.gtics.lab5_gtics_20211.entity.JuegosUserDto;
 import edu.pucp.gtics.lab5_gtics_20211.entity.Plataformas;
 import edu.pucp.gtics.lab5_gtics_20211.entity.User;
 import edu.pucp.gtics.lab5_gtics_20211.repository.JuegosRepository;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.jws.WebParam;
+import javax.servlet.http.HttpSession;
 import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.List;
@@ -33,9 +35,26 @@ public class JuegosController {
     @Autowired
     PlataformasRepository plataformasRepository;
 
-    @GetMapping("/lista")
-    public String listaJuegos (Model model){
-        return "juegos/";
+    @GetMapping(value = {"/juegos/lista", "/juegos"})
+    public String listaJuegos (Model model, HttpSession session){
+
+        User usuarioactual = (User) session.getAttribute("usuario");
+
+        if(usuarioactual.getAutorizacion().equals("USER")){
+            int idusuario = usuarioactual.getIdusuario();
+            model.addAttribute("listajuegosxuser",juegosRepository.obtenerJuegosPorUser(idusuario));
+            List<JuegosUserDto> b = juegosRepository.obtenerJuegosPorUser(idusuario);
+            System.out.println("#################################3222222");
+            System.out.println(b.get(1));
+            return "juegos/comprado";
+
+        }else{
+            model.addAttribute("listajuegosprecioasc",juegosRepository.listaJuegosPrecioAsc());
+            List<Juegos> a = juegosRepository.listaJuegosPrecioAsc();
+            System.out.println("##############################3333");
+            System.out.println(a.get(1));
+            return "juegos/lista";
+        }
     }
 
     @GetMapping(value = {"", "/", "/vista"})

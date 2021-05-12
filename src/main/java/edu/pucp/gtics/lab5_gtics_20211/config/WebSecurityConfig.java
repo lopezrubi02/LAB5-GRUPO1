@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.logout()
                 .deleteCookies("JSESSIONID").invalidateHttpSession(true)
                 .logoutSuccessUrl("/");
-               
+
     }
 
     @Autowired

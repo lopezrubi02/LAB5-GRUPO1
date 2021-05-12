@@ -12,16 +12,16 @@
             </div>
             <div class="container-fluid">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 card-app">
-                    <div class="col mb-4">
+                    <div class="col mb-4" th:each="juego : ${listajuegosxuser}">
                         <div class="card" >
-                            <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRec6M4WbTPy03DFswDEaaYYMB46DU7IJ962Q&amp;usqp=CAU" alt="Card image cap">
+                            <img class="card-img-top" th:src="${juego.imageURL}" alt="Card image cap">
                             <div class="card-body">
-                                <h5 class="card-title">FIFA 21</h5>
-                                <p class="card-text">El juego es la 28.ª entrega de la serie de videojuegos de FIFA. Es el primer videojuego de la serie FIFA para PlayStation 5 y Xbox Series X|S.</p>
+                                <h5 class="card-title" th:text="${juego.nombre}">FIFA 21</h5>
+                                <p class="card-text" th:text="${juego.descripcion}">El juego es la 28.ª entrega de la serie de videojuegos de FIFA. Es el primer videojuego de la serie FIFA para PlayStation 5 y Xbox Series X|S.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col mb-4">
+                    <!--div class="col mb-4">
                         <div class="card" >
                             <img class="card-img-top" src="https://media.vandal.net/m/15505/20121217145531_1.jpg" alt="Card image cap">
                             <div class="card-body">
@@ -30,14 +30,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div-->
             </div>
             <!-- /Contenido -->
         </main>
         <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <div class="text-muted">Colocar # Grupo - PUCP @ 2021</div>
+                    <div class="text-muted">Grupo 1- PUCP @ 2021</div>
                 </div>
             </div>
         </footer>
