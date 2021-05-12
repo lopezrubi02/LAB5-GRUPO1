@@ -42,14 +42,14 @@ public class JuegosController {
                /** Completar */
     }
 
-    @GetMapping("/nuevo")
+    @GetMapping("/juegos/nuevo")
     public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego){
-
         model.addAttribute("listaPlata",plataformasRepository.findAll());
+        //model.addAttribute("juego",juego);
         return "juegos/editarFrm.html";
     }
 
-    @GetMapping("/editar")
+    @GetMapping("/juegos/editar")
     public String editarJuegos(@RequestParam("id") int id, Model model){
         Optional<Juegos> optional = juegosRepository.findById(id);
         if(optional.isPresent()){
@@ -62,7 +62,7 @@ public class JuegosController {
         return "juegos/lista";
     }
 
-    @PostMapping("/guardar")
+    @PostMapping("/juegos/guardar")
     public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
         if(bindingResult.hasErrors()){
             model.addAttribute("listaPlata",plataformasRepository.findAll());
