@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.jws.WebParam;
 import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.List;
@@ -32,14 +33,15 @@ public class JuegosController {
     @Autowired
     PlataformasRepository plataformasRepository;
 
-    @GetMapping( ... )
-    public String listaJuegos ( ... ){
-               /** Completar */
+    @GetMapping("/lista")
+    public String listaJuegos (Model model){
+        return "juegos/";
     }
 
     @GetMapping(value = {"", "/", "/vista"})
-    public String vistaJuegos ( ... ){
-               /** Completar */
+    public String vistaJuegos (Model model){
+        model.addAttribute("listajuegosnombredesc",juegosRepository.listaJuegosNombreDesc());
+        return "juegos/vista";
     }
 
     @GetMapping("/juegos/nuevo")
