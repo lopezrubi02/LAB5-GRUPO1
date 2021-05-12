@@ -39,21 +39,26 @@ public class JuegosController {
     public String listaJuegos (Model model, HttpSession session){
 
         User usuarioactual = (User) session.getAttribute("usuario");
-
-        if(usuarioactual.getAutorizacion().equals("USER")){
+        System.out.println(usuarioactual.getAutorizacion());
+        System.out.println("#############################3");
+        System.out.println(usuarioactual.getIdusuario());
+        System.out.println(usuarioactual.getNombres());
+        if(usuarioactual.getAutorizacion().equalsIgnoreCase("USER")){
             int idusuario = usuarioactual.getIdusuario();
             model.addAttribute("listajuegosxuser",juegosRepository.obtenerJuegosPorUser(idusuario));
             List<JuegosUserDto> b = juegosRepository.obtenerJuegosPorUser(idusuario);
             System.out.println("#################################3222222");
-            System.out.println(b.get(1));
+
             return "juegos/comprado";
 
-        }else{
+        }else if(usuarioactual.getAutorizacion().equalsIgnoreCase("ADMIN")){
             model.addAttribute("listajuegosprecioasc",juegosRepository.listaJuegosPrecioAsc());
             List<Juegos> a = juegosRepository.listaJuegosPrecioAsc();
             System.out.println("##############################3333");
-            System.out.println(a.get(1));
+
             return "juegos/lista";
+        }else{
+            return "redirect:/vista";
         }
     }
 

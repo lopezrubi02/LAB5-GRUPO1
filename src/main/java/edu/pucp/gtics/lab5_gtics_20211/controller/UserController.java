@@ -46,9 +46,9 @@ public class UserController {
         String email = auth.getName();
         User usuario = userRepository.findByCorreo(email);
         session.setAttribute("usuario",usuario);
-
-
-        return "redirect:/vista";
+        System.out.println(usuario.getAutorizacion());
+        System.out.println("###########################");
+        return "redirect:/juegos";
     }
 
 }

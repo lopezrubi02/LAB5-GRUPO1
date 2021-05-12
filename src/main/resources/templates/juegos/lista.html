@@ -12,7 +12,7 @@
             </div>
             <div class="container-fluid">
 
-                <a class="btn btn-primary mt-4 mb-4" >Nuevo Juego</a>
+                <a class="btn btn-primary mt-4 mb-4" th:href="@{/juegos/nuevo}">Nuevo Juego</a>
                 <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
                 <table class="table table-striped">
                     <thead>
@@ -35,19 +35,9 @@
                             <td th:text="${juego.descripcion}">Es el segundo juego de la saga Call of Duty en presentar la futura tecnología de la guerra, y el primero en presentar historias de ramificación impulsados por elección del jugador, así como la selección de armas antes de comenzar las misiones del modo historia.</td>
                             <td th:text="${juego.plataforma}">Xbox 360</td>
                             <td th:text="${juego.precio}">70.0</td>
-                            <td><a class="btn btn-primary" th:href="@{'/juego/editar?id=' + ${juego.idjuego}}">Editar</a></td>
-                            <td><a class="btn btn-danger" th:href="@{'/juego/borrar?id=' + ${juego.idjuego}}">Borrar</a></td>
+                            <td><a class="btn btn-primary" th:href="@{'/juegos/editar?id=' + ${juego.idjuego}}">Editar</a></td>
+                            <td><a class="btn btn-danger" th:href="@{'/juegos/borrar?id=' + ${juego.idjuego}}">Borrar</a></td>
                         </tr>
-                        <!--tr>
-                            <td>2</td>
-                            <td><img src="https://store-images.s-microsoft.com/image/apps.38337.69011092827716296.e9190db7-6f4c-478c-8555-3edad4336a39.c312dbb9-bd59-403b-9161-3d058274b782" width="80" class="rounded" /></td>
-                            <td>Assassin Creed 2</td>
-                            <td>Es una serie de videojuegos de acción-aventura histórica con tintes de ciencia ficción, ambientada en las Cruzadas.</td>
-                            <td>PlayStation 4</td>
-                            <td>100.0</td>
-                            <td><a class="btn btn-primary" href="/gameshop3/juegos/editar?id=3">Editar</a></td>
-                            <td><a class="btn btn-danger" href="/gameshop3/juegos/borrar?id=3">Borrar</a></td>
-                        </tr-->
                     </tbody>
                 </table>
 

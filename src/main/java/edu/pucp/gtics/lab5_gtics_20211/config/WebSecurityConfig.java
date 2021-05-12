@@ -23,8 +23,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("correo").defaultSuccessUrl("/user/signInRedirect",true);
 
         http.authorizeRequests()
-                .antMatchers("/juegos","/juegos/**").hasAnyAuthority("admin","user")
-                .antMatchers("/plataformas","/plataformas/**").hasAuthority("admin")
+                .antMatchers("/juegos","/juegos/**").hasAnyAuthority("ADMIN","USER")
+                .antMatchers("/plataformas","/plataformas/**").hasAuthority("ADMIN")
                 .anyRequest().permitAll();
 
         http.logout()

@@ -19,7 +19,7 @@
                     <a class="nav-link" th:classappend="${option == 'Juegos'?'active':''}"
                        th:href="@{/juegos}">Juegos</a>
                 </li>
-                <li sec:authorize="hasAnyAuthority('admin')" class="nav-item">
+                <li sec:authorize="hasAnyAuthority('ADMIN')" class="nav-item">
                     <a class="nav-link" th:classappend="${option == 'Plataformas'?'active':''}"
                        th:href="@{/plataformas}">Plataformas</a>
                 </li>
